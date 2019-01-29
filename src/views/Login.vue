@@ -13,13 +13,14 @@ import firebase from 'firebase/app';
 export default {
     name: 'login',
     data() {
-        return {};
+        return {}
     },
     created() {
-        var u = localStorage.getItem('user');
-        if (u) {
-            this.$router.replace('/home');
-        }
+        firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+                this.$router.replace('/home');
+            }
+        });
         firebase.auth().getRedirectResult().then(function(result) {
             // Google Access token
             var token = result.credential.accessToken;
