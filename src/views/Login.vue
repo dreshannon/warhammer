@@ -24,9 +24,6 @@ export default {
         firebase.auth().getRedirectResult().then(function(result) {
             // Google Access token
             var token = result.credential.accessToken;
-            // Signed in user info
-            var user = result.user;
-            localStorage.setItem('user', JSON.stringify(user));
             this.$router.replace('/home');
         }).catch(function(error) {
             var errorCode = error.code;
