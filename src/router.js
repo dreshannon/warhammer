@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Login from './views/Login.vue';
 import BasicRules from './views/BasicRules.vue';
+import KillTeam from './views/KillTeam.vue';
 
 Vue.use(Router)
 
@@ -43,6 +44,14 @@ export default new Router({
             path: '/basics',
             name: 'basics',
             component: BasicRules,
+            meta: {
+                requiresAuth: true
+            }
+        },
+        {
+            path: '/killteam',
+            name: 'killteam',
+            component: KillTeam,
             meta: {
                 requiresAuth: true
             }

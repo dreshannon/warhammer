@@ -1,5 +1,5 @@
 <template>
-    <div id="basicRules">
+    <div id="killTeam">
         <header class="site-header">
             <div>
                 <nav class="main-nav">
@@ -14,20 +14,18 @@
                 </nav>
             </div>
         </header>
-        <h1>Basic Game Rules</h1>
-        <!-- <iframe src="../assets/8th Ed Core Rules.pdf" frameborder="0" height="500px" width="100%"></iframe> -->
+        <h1>Kill Teams Rules</h1>
     </div>
 </template>
 
 <script>
 export default {
-    name: 'basics'
+    name: 'killteam'
 }
 </script>
 
 <style scoped>
- #basicRules {
-    background-color: #212629;
- }
+    #killTeam {
+        background: linear-gradient(to right, #BC3A01, #F27301);
+    }
 </style>
-
