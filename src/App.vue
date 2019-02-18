@@ -2,30 +2,22 @@
     <div id="app">
         <header class="site-header">
             <div>
-                <nav class="main-nav">
-                    <ul class="main-sections">
-                        <li class="">
-                            <a href="#">My Armies</a>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" id="rulesDropdown" role="button" data-toggle="dropdown">Rules</a>
-                        </li>
-                        <li>
-                            <a href="#">Lists</a>
-                        </li>
-                        <li>
-                            <a href="#">Game Gen</a>
-                        </li>
-                        <li>
-                            <a href="#">Logout</a>
-                        </li>
-                    </ul>
-                </nav>
+                <navigation />
             </div>
         </header>
         <router-view/>
     </div>
 </template>
+
+<script>
+import Navigation from '@/components/Navigation.vue';
+
+export default {
+    components: {
+        Navigation
+    }
+}
+</script>
 
 
 <style>
@@ -35,8 +27,9 @@
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
+    text-align: left;
+    /* color: #2c3e50; */
+    color: white;
     background-color: #212629;
 }
 </style>

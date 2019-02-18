@@ -2,26 +2,22 @@
     <div id="basicRules">
         <header class="site-header">
             <div>
-                <nav class="main-nav">
-                    <ul class="main-sections">
-                        <li class="">
-                            <router-link class="dropdown-item" to="/basics">Base Game</router-link>
-                        </li>
-                        <li class="dropdown">
-                            <router-link class="dropdown-item" to="/killteam">Kill Team</router-link>
-                        </li>
-                    </ul>
-                </nav>
+                <rules-navigation />
             </div>
         </header>
         <h1>Basic Game Rules</h1>
-        <!-- <iframe src="../assets/8th Ed Core Rules.pdf" frameborder="0" height="500px" width="100%"></iframe> -->
+        <embed src="../assets/8th_Ed_Core_Rules.pdf" type="application/pdf" height="100%" width="100%">
     </div>
 </template>
 
 <script>
+import RulesNavigation from '@/components/RulesNavigation.vue';
+
 export default {
-    name: 'basics'
+    name: 'basics',
+    components: {
+        RulesNavigation
+    }
 }
 </script>
 

@@ -4,6 +4,8 @@ import Home from './views/Home.vue'
 import Login from './views/Login.vue';
 import BasicRules from './views/BasicRules.vue';
 import KillTeam from './views/KillTeam.vue';
+import Compendium from './views/Compendium.vue';
+import Armies from './views/Armies.vue';
 
 Vue.use(Router)
 
@@ -55,6 +57,16 @@ export default new Router({
             meta: {
                 requiresAuth: true
             }
+        },
+        {
+            path: '/compendium',
+            name: 'compendium',
+            component: Compendium
+        },
+        {
+            path: '/armies',
+            name: 'armies',
+            component: Armies
         }
     ]
 })

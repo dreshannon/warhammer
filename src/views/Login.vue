@@ -1,19 +1,22 @@
 <template>
     <div class="login">
         <h3>Sign In</h3>
-        <button @click="login">Get the fuck outta here!</button>
+        <button @click="login">Login</button>
         <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
     </div>
 </template>
 
 <script>
+import Firebase from '@/util/firebase';
 import firebase from 'firebase/app';
 // var provider = new firebase.auth.GoogleAuthProvider();
 
 export default {
     name: 'login',
     data() {
-        return {}
+        return {
+            fb: new Firebase()
+        }
     },
     created() {
         firebase.auth().onAuthStateChanged(user => {
