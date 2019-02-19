@@ -5,7 +5,7 @@
                 <rules-navigation />
             </div>
         </header>
-        <h1>Compendium - Armies <button type="button" class="btn btn-dark" id="editBtn" @click="toggleEditing">{{ editBtnText }}</button></h1>
+        <h1 class="page-title">Compendium - Armies <button type="button" class="btn btn-dark" id="editBtn" @click="toggleEditing">{{ editBtnText }}</button></h1>
         <div class="row">
             <div class="col-3">
                 <button class="btn btn-block btn-dark">New Army</button>
@@ -17,6 +17,7 @@
             </div>
             <div class="col-9" v-if="!editing">
                 <datasheet v-if="currentUnit" :unit="currentUnit" />
+                <button type="button" class="btn btn-danger btn-block" v-if="currentUnit">Delete this unit</button>
             </div>
             <div class="col-9" v-else>
                 <data-edit v-if="currentUnit" :unit="currentUnit" :handleSave="save" />
@@ -86,6 +87,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.page-title {
+    display: flex;
+    flex-flow: row wrap;
+}
+
 #editBtn {
     position: absolute;
     right: 5px;
