@@ -5,17 +5,21 @@
                 <rules-navigation />
             </div>
         </header>
-        <h1>Compendium - Armies</h1>
+        <h1>Compendium - Armies <button type="button" class="btn btn-dark" id="editBtn" @click="toggleEditing">{{ editBtnText }}</button></h1>
         <div class="row">
             <div class="col-3">
+                <button class="btn btn-block btn-dark">New Army</button>
                 <ul class="root" v-if="fb.docData">
-                    <li v-for="(army, index) in fb.docData.armies" :key="index">
-                        <armies-list-item :army="army" :handleSelect="setCurrentUnit" />
+                    <li v-for="(army, index) in fb.docData.armies" :key="index" :id="army.army">
+                        <armies-list-item :army="army" :handleSelect="setCurrentUnit" :save="save" :setCurrentUnit="setCurrentUnit" :edit="toggleEditing" />
                     </li>
                 </ul>
             </div>
-            <div class="col-9">
+            <div class="col-9" v-if="!editing">
                 <datasheet v-if="currentUnit" :unit="currentUnit" />
+            </div>
+            <div class="col-9" v-else>
+                <data-edit v-if="currentUnit" :unit="currentUnit" :handleSave="save" />
             </div>
         </div>
     </div>
@@ -26,18 +30,27 @@ import Firebase from '@/util/firebase';
 import RulesNavigation from '@/components/RulesNavigation.vue';
 import ArmiesListItem from '@/components/ArmiesListItem.vue';
 import Datasheet from '@/components/Datasheet.vue';
+import DataEdit from '@/components/DataEdit.vue';
 
 export default {
+    name: 'armies',
     components: {
         RulesNavigation,
         ArmiesListItem,
-        Datasheet
+        Datasheet,
+        DataEdit
     },
+    props: ['fb'],
     data() {
         return{
             open: false,
-            fb: null,
-            currentUnit: null
+            currentUnit: null,
+            editing: false
+        }
+    },
+    computed: {
+        editBtnText() {
+            return this.editing ? 'Return to datasheets' : 'Edit datasheets';
         }
     },
     // watch: {
@@ -45,80 +58,25 @@ export default {
     // },
     methods: {
         initialize() {
-            this.fb = new Firebase();
             this.fb.setDocument('datasheets', 'armies');
             this.fb.setDocumentData();
         },
         toggle() {
             this.open = !this.open;
         },
+        toggleEditing() {
+            this.editing = !this.editing;
+        },
         setCurrentUnit(unit) {
             this.currentUnit = unit;
         },
-        setData() {
-            this.fb.docData.armies[0].units.push({
-                    "unitName": "Lychguard",
-                    "battlefieldRole": "",
-                    "powerRating": 8,
-                    "profiles": [
-                        {
-                            "name": "Lychguard",
-                            "move": "5\"",
-                            "weaponSkill": "3+",
-                            "ballisticSkill": "3+",
-                            "strength": 5,
-                            "toughness": 5,
-                            "wounds": 2,
-                            "attacks": 2,
-                            "leadership": 10,
-                            "save": "3+"
-                        }
-                    ],
-                    "unitComposition": "This unit contains 5 Lychguard. It can include up to 5 additional Lychguard (Power Rating +8). Each model is armed with a warscyhe.",
-                    "wargearOptions": "The entire unit may replace their warscythes with hyperphase swords and dispersion shields.",
-                    "abilities": [
-                        {
-                            "ability": "Reanimation Protocols",
-                            "description": ""
-                        },
-                        {
-                            "ability": "Dispersion Shield",
-                            "description": "A model equipped with a dispersion shield has a 4+ invulnerable save."
-                        }
-                    ],
-                    "weapons": [
-                        {
-                            "weapon": "",
-                            "range": "12\"",
-                            "type": "Pistol 1",
-                            "strength": 6,
-                            "armourPentration": 0,
-                            "damage": 1,
-                            "abilities": ""
-                        },
-                        {
-                            "weapon": "",
-                            "range": "12\"",
-                            "type": "Heavy D3",
-                            "strength": 4,
-                            "armourPentration": -3,
-                            "damage": 1,
-                            "abilities": "Each time you make a wound roll of 6+ for this weapon, the target suffers a mortal wound in addition to any other damage."
-                        }
-                    ],
-                    "factionKeywords": [
-                        "Necrons",
-                        "Canoptek",
-                        "<Dynasty>"
-                    ],
-                    "keyboard": [
-                        "Beasts",
-                        "Canoptek Wraiths"
-                    ]
-                });
-            return this.fb.docRef.update({
+        save() {
+            this.fb.docRef.update({
                 armies: this.fb.docData.armies
-            });
+            })
+            .then(() => {
+                this.toggleEditing();
+            })
         }
     },
     created() {
@@ -128,27 +86,29 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+#editBtn {
+    position: absolute;
+    right: 5px;
+}
+
 ul {
     list-style-type: none;
     text-align: left;
 }
 
-/* Style the caret/arrow */
-.caret {
-  cursor: pointer;
-  user-select: none; /* Prevent text selection */
-}
+#armies {
+    .datasheet {
+        background-image: url(../assets/svgs/Necron_emblem.svg);
+        background-repeat: no-repeat;
+        background-position: center;
+    }
 
-/* Create the caret/arrow with a unicode, and style it */
-.caret::before {
-  content: "\25B6";
-  color: black;
-  display: inline-block;
-  margin-right: 6px;
-}
-
-/* Rotate the caret/arrow icon when clicked on (using JavaScript) */
-.caret-down::before {
-  transform: rotate(90deg);
+    .root {
+        #Necrons {
+            background-image: url(../assets/svgs/Necron_emblem.svg);
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+    }
 }
 </style>

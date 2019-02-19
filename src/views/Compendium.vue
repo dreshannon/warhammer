@@ -23,6 +23,7 @@
 import RulesNavigation from '@/components/RulesNavigation.vue';
 
 export default {
+    name: 'compendium',
     components: {
         RulesNavigation
     }

@@ -3,7 +3,8 @@
         <div
             class="bold"
             @click="toggle">
-            <span class=""><i class="fas fa-caret-right"></i></span>
+            <span v-show="!open"><i class="fas fa-caret-right"></i></span>
+            <span v-show="open"><i class="fas fa-caret-down"></i></span>
             {{ army.army }}
         </div>
         <ul v-show="open">
@@ -13,13 +14,14 @@
                 @click="handleSelect(unit)">
                 {{ unit.unitName }}
             </li>
+            <li><button type="button" class="btn btn-block btn-dark" @click="addUnit">New Unit</button></li>
         </ul>
     </div>
 </template>
 
 <script>
 export default {
-    props: ['army', 'handleSelect'],
+    props: ['army', 'handleSelect', 'save', 'setCurrentItem', 'edit'],
     data() {
         return {
             open: false
@@ -28,7 +30,57 @@ export default {
     methods: {
         toggle() {
             this.open = !this.open;
+        },
+        addUnit() {
+            this.army.units.push({
+                unitName: 'newUnit',
+                battlefieldRole: '',
+                powerRating: null,
+                profiles: [{
+                    name: '',
+                    move: '',
+                    weaponSkill: '',
+                    ballisticSkill: '',
+                    strength: null,
+                    toughness: null,
+                    wounds: null,
+                    attacks: null,
+                    leadership: null,
+                    save: ''
+                }],
+                unitComposition: '',
+                weapons: [{
+                    weapon: '',
+                    range: '',
+                    type: '',
+                    strength: null,
+                    armourPenetration: null,
+                    damage: null,
+                    abilities: ''
+                }],
+                wargearOptions: '',
+                abilities: [{
+                    ability: '',
+                    description: ''
+                }],
+                factionKeywords: [''],
+                keywords: ['']
+            });
+
+            this.save();
+            this.setCurrentUnit(this.army.units[this.army.units.length-1]);
+            this.edit();
         }
     }
 }
 </script>
+
+<style lang="scss" scoped>
+ul {
+    list-style-type: none;
+
+    li {
+        padding: .5rem 0;
+    }
+}
+</style>
