@@ -13,11 +13,7 @@ import firebase from 'firebase/app';
 
 export default {
     name: 'login',
-    data() {
-        return {
-            fb: new Firebase()
-        }
-    },
+    props: ['fb'],
     created() {
         firebase.auth().onAuthStateChanged(user => {
             if (user) {

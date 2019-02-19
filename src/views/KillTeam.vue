@@ -2,16 +2,7 @@
     <div id="killTeam">
         <header class="site-header">
             <div>
-                <nav class="main-nav">
-                    <ul class="main-sections">
-                        <li class="">
-                            <router-link class="dropdown-item" to="/basics">Base Game</router-link>
-                        </li>
-                        <li class="dropdown">
-                            <router-link class="dropdown-item" to="/killteam">Kill Team</router-link>
-                        </li>
-                    </ul>
-                </nav>
+                <rules-navigation />
             </div>
         </header>
         <h1>Kill Teams Rules</h1>
@@ -19,8 +10,13 @@
 </template>
 
 <script>
+import RulesNavigation from '@/components/RulesNavigation.vue';
+
 export default {
-    name: 'killteam'
+    name: 'killteam',
+    components: {
+        RulesNavigation
+    }
 }
 </script>
 

@@ -5,16 +5,25 @@
                 <navigation />
             </div>
         </header>
-        <router-view/>
+        <router-view :fb="fb"/>
     </div>
 </template>
 
 <script>
+import Firebase from '@/util/firebase';
 import Navigation from '@/components/Navigation.vue';
 
 export default {
     components: {
         Navigation
+    },
+    data() {
+        return {
+            fb: null
+        }
+    },
+    created() {
+        this.fb = new Firebase();
     }
 }
 </script>
@@ -22,6 +31,10 @@ export default {
 
 <style>
 @import './assets/styles/main-nav.css';
+
+body {
+    background-color: #212629;
+}
 
 #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;

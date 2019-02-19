@@ -11,7 +11,6 @@
 </template>
 
 <script>
-import Firebase from '@/util/firebase';
 import RulesNavigation from '@/components/RulesNavigation.vue';
 
 export default {
@@ -19,14 +18,7 @@ export default {
     components: {
         RulesNavigation
     },
-    data() {
-        return {
-            fb: null
-        }
-    },
-    created() {
-        this.fb = new Firebase();
-    }
+    props: ['fb']
 }
 </script>
 
