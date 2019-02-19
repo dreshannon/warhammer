@@ -9,7 +9,8 @@
         <ul v-show="open">
             <li
                 class="item"
-                v-for="(unit, index) in army.units" :key="index">
+                v-for="(unit, index) in army.units" :key="index"
+                @click="handleSelect(unit)">
                 {{ unit.unitName }}
             </li>
         </ul>
@@ -18,7 +19,7 @@
 
 <script>
 export default {
-    props: ['army'],
+    props: ['army', 'handleSelect'],
     data() {
         return {
             open: false

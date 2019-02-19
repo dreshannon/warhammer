@@ -11,12 +11,21 @@
 </template>
 
 <script>
+import Firebase from '@/util/firebase';
 import RulesNavigation from '@/components/RulesNavigation.vue';
 
 export default {
     name: 'basics',
     components: {
         RulesNavigation
+    },
+    data() {
+        return {
+            fb: null
+        }
+    },
+    created() {
+        this.fb = new Firebase();
     }
 }
 </script>

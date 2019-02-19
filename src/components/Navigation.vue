@@ -4,8 +4,8 @@
             <li class="">
                 <a href="#">My Armies</a>
             </li>
-            <li class="dropdown">
-                <a href="#" id="rulesDropdown" role="button" data-toggle="dropdown">Rules</a>
+            <li class="">
+                <router-link class="" to="/basics">Rules</router-link>
             </li>
             <li>
                 <a href="#">Lists</a>
