@@ -81,13 +81,13 @@
         <div class="row">
             <div class="col-3">Faction Keywords</div>
             <div class="col-9">
-                <p><span v-for="(keyword, index) in unit.factionKeywords" :key="index">{{ keyword.keyword }} </span></p>
+                <p><span v-for="(keyword, index) in unit.factionKeywords" :key="index">{{ keyword.keyword }}<span v-if="index != (unit.keywords.length - 1)">,</span> </span></p>
             </div>
         </div>
         <div class="row">
             <div class="col-3">Keywords</div>
             <div class="col-9">
-                <p><span v-for="(keyword, index) in unit.keywords" :key="index">{{ keyword.keyword }} </span></p>
+                <p><span v-for="(keyword, index) in unit.keywords" :key="index">{{ keyword.keyword }}<span v-if="index != (unit.keywords.length - 1)">,</span> </span></p>
             </div>
         </div>
     </div>

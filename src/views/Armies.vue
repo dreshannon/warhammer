@@ -19,7 +19,6 @@
                 <div class="col-12 col-lg-9" v-if="!editing">
                     <datasheet v-if="currentUnit" :unit="currentUnit" />
                     <button type="button" class="d-block d-lg-none btn btn-dark btn-block" @click="toggleEditing" v-if="currentUnit">{{ editBtnText }}</button>
-                    <button type="button" class="btn btn-danger btn-block" v-if="currentUnit">Delete this unit</button>
                 </div>
                 <div class="col-12 col-lg-9" v-else>
                     <data-edit v-if="currentUnit" :unit="currentUnit" :handleSave="save" :handleReturn="toggleEditing" />
@@ -68,6 +67,9 @@ export default {
         },
         setCurrentUnit(unit) {
             this.currentUnit = unit;
+        },
+        deleteUnit(armyIndex, unit) {
+            return;
         },
         save() {
             this.fb.docRef.update({

@@ -45,7 +45,7 @@
 
 <script>
 export default {
-    props: ['army', 'handleSelect', 'save', 'setCurrentItem', 'edit'],
+    props: ['army', 'handleSelect', 'save', 'setCurrentUnit', 'edit'],
     data() {
         return {
             open: false
