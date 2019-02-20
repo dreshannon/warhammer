@@ -1,121 +1,185 @@
 <template>
     <div class="dataedit">
+        <button type="button" class="btn btn-dark btn-block" @click="handleReturn">Return to datasheet</button>
+        <button type="submit" class="btn btn-primary btn-block">Save</button>
         <form @submit.prevent="handleSave">
-            <div class="row">
-                <div class="col"><input type="text" class="form-control" v-model="unit.unitName"></div>
-                <div class="col"><input type="number" class="form-control" v-model="unit.powerRating"></div>
-            </div>
             <div class="form-group">
-                <label for="unitNameInput">Battlefield Role</label>
-                <input type="text" class="form-control" id="unitNameInput" v-model="unit.battlefieldRole">
+                <label for="unitNameInput">Unit name</label>
+                <input type="text" class="form-control" id="unitNameInput" v-model="unit.unitName">
             </div>
-            <table class="table table-striped table-dark">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>M</th>
-                        <th>WS</th>
-                        <th>BS</th>
-                        <th>S</th>
-                        <th>T</th>
-                        <th>W</th>
-                        <th>A</th>
-                        <th>Ld</th>
-                        <th>Sv</th>
-                        <th><button class="btn" type="button" @click="addProfile">Add</button></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="(profile, index) in unit.profiles" :key="index">
-                        <td><input type="text" class="form-control" v-model="profile.name"></td>
-                        <td><input type="text" class="form-control" v-model="profile.move"></td>
-                        <td><input type="text" class="form-control" v-model="profile.weaponSkill"></td>
-                        <td><input type="text" class="form-control" v-model="profile.ballisticSkill"></td>
-                        <td><input type="number" class="form-control" v-model="profile.strength"></td>
-                        <td><input type="number" class="form-control" v-model="profile.toughness"></td>
-                        <td><input type="number" class="form-control" v-model="profile.wounds"></td>
-                        <td><input type="number" class="form-control" v-model="profile.attacks"></td>
-                        <td><input type="number" class="form-control" v-model="profile.leadership"></td>
-                        <td><input type="text" class="form-control" v-model="profile.save"></td>
-                        <td><i class="fas fa-times-circle" @click="removeProfile(profile.name)"></i></td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="">Battlefield role</label>
+                        <input type="text" class="form-control" v-model="unit.battlefieldRole">
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="">Power Rating</label>
+                        <input type="number" class="form-control" v-model="unit.powerRating">
+                    </div>
+                </div>
+            </div>
+            <h3 class="titleWithAdd">Profiles <button class="btn btnAdd" type="button" @click="addProfile"><i class="fas fa-plus-circle"></i></button></h3>
+            <div class="row" v-for="(profile, index) in unit.profiles" :key="index">
+                <div class="col-12">
+                    <div class="form-group">
+                        <label for="">Name</label>
+                        <input type="text" class="form-control" v-model="profile.name">
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label for="">Move</label>
+                        <input type="text" class="form-control" v-model="profile.move">
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label for="">Weapon Skill</label>
+                        <input type="text" class="form-control" v-model="profile.weaponSkill">
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label for="">Ballistic Skill</label>
+                        <input type="text" class="form-control" v-model="profile.ballisticSkill">
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label for="">Strength</label>
+                        <input type="text" class="form-control" v-model="profile.strength">
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label for="">Toughness</label>
+                        <input type="text" class="form-control" v-model="profile.toughness">
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label for="">Wounds</label>
+                        <input type="text" class="form-control" v-model="profile.wounds">
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label for="">Attacks</label>
+                        <input type="text" class="form-control" v-model="profile.attacks">
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label for="">Leadership</label>
+                        <input type="text" class="form-control" v-model="profile.leadership">
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label for="">Save</label>
+                        <input type="text" class="form-control" v-model="profile.save">
+                    </div>
+                </div>
+                <div class="col-12">
+                    <button type="button" class="btn btn-danger btn-block" @click="removeProfile(profile.name)">Delete Profile</button>
+                </div>
+            </div>
             <div class="form-group">
                 <label for="unitCompositionInput">Unit composition</label>
                 <input type="text" class="form-control" id="unitCompositionInput" v-model="unit.unitComposition">
             </div>
-            <table class="table table-striped table-dark">
-                <thead>
-                    <tr>
-                        <th>Weapon</th>
-                        <th>Range</th>
-                        <th>Type</th>
-                        <th>S</th>
-                        <th>AP</th>
-                        <th>D</th>
-                        <th>Abilites</th>
-                        <th><button class="btn" type="button" @click="addWeapon">Add</button></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="(weapon, index) in unit.weapons" :key="index">
-                        <td><input type="text" class="form-control" v-model="weapon.weapon"></td>
-                        <td><input type="text" class="form-control" v-model="weapon.range"></td>
-                        <td><input type="text" class="form-control" v-model="weapon.type"></td>
-                        <td><input type="text" class="form-control" v-model="weapon.strength"></td>
-                        <td><input type="number" class="form-control" v-model="weapon.armourPenetration"></td>
-                        <td><input type="number" class="form-control" v-model="weapon.damage"></td>
-                        <td><input type="text" class="form-control" v-model="weapon.abilities"></td>
-                        <td><i class="fas fa-times-circle" @click="removeWeapon(weapon.weapon)"></i></td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="row">
-                <div class="col-3">
-                    Wargear Options
+            <h3 class="titleWithAdd">Weapons <button class="btn btnAdd" type="button" @click="addWeapon"><i class="fas fa-plus-circle"></i></button></h3>
+            <div class="row" v-for="(weapon, index) in unit.weapons" :key="index">
+                <div class="col-12">
+                    <div class="form-group">
+                        <label for="">Weapon</label>
+                        <input type="text" class="form-control" v-model="weapon.weapon">
+                    </div>
                 </div>
-                <div class="col-9">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="">Range</label>
+                        <input type="text" class="form-control" v-model="weapon.range">
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="">Type</label>
+                        <input type="text" class="form-control" v-model="weapon.type">
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label for="">Strength</label>
+                        <input type="text" class="form-control" v-model="weapon.strength">
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label for="">Armour Penetration</label>
+                        <input type="number" class="form-control" v-model="weapon.armourPenetration">
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label for="">Damage</label>
+                        <input type="number" class="form-control" v-model="weapon.damage">
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-group">
+                        <label for="">Abilites</label>
+                        <input type="text" class="form-control" v-model="weapon.abilities">
+                    </div>
+                </div>
+                <div class="col-12">
+                    <button type="button" class="btn btn-danger btn-block" @click="removeWeapon(weapon.weapon)">Delete Weapon</button>
+                </div>
+            </div>
+            <h3 class="title">Wargear Options</h3>
+            <div class="row">
+                <div class="col-12">
                     <input type="text" class="form-control" v-model="unit.wargearOptions">
                 </div>
             </div>
-            <div class="row">
-                <div class="col-3">Abilites <button class="btn" type="button" @click="addAbility">Add</button></div>
-                <div class="col-9">
-                    <div class="row" v-for="(ability, index) in unit.abilities" :key="index">
-                        <div class="col-3">
-                            <input type="text" class="form-control" v-model="ability.ability">
-                        </div>
-                        <div class="col-8">
-                            <input type="text" class="form-control" v-model="ability.description">
-                        </div>
-                        <div class="col-1">
-                            <i class="fas fa-times-circle" @click="removeAbility(ability.ability)"></i>
-                        </div>
+            <h3 class="titleWithAdd">Abilities <button class="btn btnAdd" type="button" @click="addAbility"><i class="fas fa-plus-circle"></i></button></h3>
+            <div class="row" v-for="(ability, index) in unit.abilities" :key="index">
+                <div class="col-12">
+                    <div class="form-group">
+                        <label for="">Ability</label>
+                        <input type="text" class="form-control" v-model="ability.ability">
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-3">Faction Keywords</div>
-                <div class="col-9">
-                    <p><span v-for="(keyword, index) in unit.factionKeywords" :key="index">{{ keyword }} </span></p>
+                <div class="col-12">
+                    <div class="form-group">
+                        <label for="">Description</label>
+                        <input type="text" class="form-control" v-model="ability.description">
+                    </div>
                 </div>
+                <div class="col-12"><button type="button" class="btn btn-danger btn-block" @click="removeAbility(weapon.weapon)">Delete Ability</button></div>
             </div>
-            <div class="row">
-                <div class="col-3">Keywords</div>
-                <div class="col-9">
-                    <p><span v-for="(keyword, index) in unit.keywords" :key="index">{{ keyword }} </span></p>
-                    <div class="row" v-for="(keyword, index) in unit.keywords" :key="index"></div>
-                </div>
+            <h3 class="titleWithAdd">Faction Keywords <button class="btn btnAdd" type="button" @click="addFactionKeyword"><i class="fas fa-plus-circle"></i></button></h3>
+            <div class="row mb-2" v-for="(keyword, index) in unit.factionKeywords" :key="index">
+                <div class="col-7"><input type="text" class="form-control" v-model="keyword.keyword"></div>
+                <div class="col-5"><button type="button" class="btn btn-danger btn-block" @click="removeFactionKeyword(keyword.keyword)">Delete Keyword</button></div>
+            </div>
+            <h3 class="titleWithAdd">Keywords <button class="btn btnAdd" type="button" @click="addKeyword"><i class="fas fa-plus-circle"></i></button></h3>
+            <div class="row mb-2" v-for="(keyword, index) in unit.keywords" :key="index">
+                <div class="col-7"><input type="text" class="form-control" v-model="keyword.keyword"></div>
+                <div class="col-5"><button type="button" class="btn btn-danger btn-block" @click="removeKeyword(keyword.keyword)">Delete Keyword</button></div>
             </div>
             <button type="submit" class="btn btn-primary btn-block">Save</button>
+            <button type="button" class="btn btn-dark btn-block" @click="handleReturn">Return</button>
         </form>
     </div>
 </template>
 
 <script>
 export default {
-    props: ['unit', 'handleSave'],
+    props: ['unit', 'handleSave', 'handleReturn'],
     methods: {
         addProfile() {
             this.unit.profiles.push({
@@ -162,7 +226,47 @@ export default {
         removeAbility(abilityName) {
             this.unit.abilities = this.unit.abilities.filter(ability => ability.ability != abilityName);
             return;
+        },
+        addFactionKeyword() {
+            this.unit.factionKeywords.push({
+                keyword: ''
+            });
+            return;
+        },
+        removeFactionKeyword(keywordDelete) {
+            this.unit.factionKeywords = this.unit.factionKeywords.filter(keyword => keyword.keyword != keywordDelete);
+            return;
+        },
+        addKeyword() {
+            this.unit.keywords.push({
+                keyword: ''
+            });
+            return;
+        },
+        removeKeyword(keywordDelete) {
+            this.unit.keywords = this.unit.keywords.filter(keyword => keyword.keyword != keywordDelete);
+            return;
         }
     }
 }
 </script>
+
+<style lang="scss" scoped>
+.title {
+    margin-top: 1rem;
+}
+
+.titleWithAdd {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1rem;
+}
+
+.btnAdd {
+    background-color: transparent;
+    border: none;
+    color: white;
+}
+</style>

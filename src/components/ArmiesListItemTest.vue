@@ -1,24 +1,6 @@
 <template>
     <div>
-        <div class="d-none d-lg-block">
-            <div
-                class="bold"
-                @click="toggle">
-                <span v-show="!open"><i class="fas fa-caret-right"></i></span>
-                <span v-show="open"><i class="fas fa-caret-down"></i></span>
-                {{ army.army }}
-            </div>
-            <ul v-show="open">
-                <li
-                    class="item"
-                    v-for="(unit, index) in army.units" :key="index"
-                    @click="handleSelect(unit)">
-                    {{ unit.unitName }}
-                </li>
-                <li><button type="button" class="btn btn-block btn-dark" @click="addUnit">New Unit</button></li>
-            </ul>
-        </div>
-        <div class="d-block d-lg-none list-group">
+        <div class="list-group">
             <button
                 type="button"
                 class="list-group-item list-group-item-action"
@@ -49,6 +31,11 @@ export default {
     data() {
         return {
             open: false
+        }
+    },
+    computed: {
+        collapseId() {
+            return this.army.army.concat('#');
         }
     },
     methods: {
@@ -100,14 +87,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-ul {
-    list-style-type: none;
-
-    li {
-        padding: .5rem 0;
-    }
-}
-
 .list-group-item {
     background-color: #212629;
     border: none;
