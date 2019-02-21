@@ -12,7 +12,7 @@
                 <li
                     class="item"
                     v-for="(unit, index) in army.units" :key="index"
-                    @click="handleSelect(unit)">
+                    @click="handleSelect(armyIndex, unit)">
                     {{ unit.unitName }}
                 </li>
                 <li><button type="button" class="btn btn-block btn-dark" @click="addUnit">New Unit</button></li>
@@ -33,7 +33,7 @@
                         class="list-group-item list-group-item-action"
                         v-for="(unit, index) in army.units"
                         :key="index"
-                        @click="handleSelect(unit)">
+                        @click="handleSelect(armyIndex, unit)">
                         {{ unit.unitName }}
                     </button>
                     <button v-show="open" type="button" class="btn btn-block btn-dark" @click="addUnit">New Unit</button>
@@ -45,7 +45,7 @@
 
 <script>
 export default {
-    props: ['army', 'handleSelect', 'save', 'setCurrentUnit', 'edit'],
+    props: [ 'armyIndex','army', 'handleSelect', 'save', 'edit'],
     data() {
         return {
             open: false
@@ -92,8 +92,8 @@ export default {
             });
 
             this.save();
-            this.setCurrentUnit(this.army.units[this.army.units.length-1]);
             this.edit();
+            this.handleSelect(this.armyIndex, this.army.units[this.army.units.length-1]);
         }
     }
 }

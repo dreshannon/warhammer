@@ -90,11 +90,12 @@
                 <p><span v-for="(keyword, index) in unit.keywords" :key="index">{{ keyword.keyword }}<span v-if="index != (unit.keywords.length - 1)">,</span> </span></p>
             </div>
         </div>
+        <button type="button" class="btn btn-danger btn-block" @click="handleDelete(armyIndex, unit.unitName)">Delete</button>
     </div>
 </template>
 
 <script>
 export default {
-    props: ['unit']
+    props: ['unit', 'armyIndex', 'handleDelete']
 }
 </script>

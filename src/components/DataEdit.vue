@@ -1,8 +1,8 @@
 <template>
     <div class="dataedit">
+        <form @submit.prevent="handleSave">
         <button type="button" class="btn btn-dark btn-block" @click="handleReturn">Return to datasheet</button>
         <button type="submit" class="btn btn-primary btn-block">Save</button>
-        <form @submit.prevent="handleSave">
             <div class="form-group">
                 <label for="unitNameInput">Unit name</label>
                 <input type="text" class="form-control" id="unitNameInput" v-model="unit.unitName">
