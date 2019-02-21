@@ -22,7 +22,7 @@
                 </div>
             </div>
             <h3 class="titleWithAdd">Profiles <button class="btn btnAdd" type="button" @click="addProfile"><i class="fas fa-plus-circle"></i></button></h3>
-            <div class="row" v-for="(profile, index) in unit.profiles" :key="index">
+            <div class="row" v-for="(profile, index) in unit.profiles" :key="profile.name">
                 <div class="col-12">
                     <div class="form-group">
                         <label for="">Name</label>
@@ -92,7 +92,7 @@
                 <input type="text" class="form-control" id="unitCompositionInput" v-model="unit.unitComposition">
             </div>
             <h3 class="titleWithAdd">Weapons <button class="btn btnAdd" type="button" @click="addWeapon"><i class="fas fa-plus-circle"></i></button></h3>
-            <div class="row" v-for="(weapon, index) in unit.weapons" :key="index">
+            <div class="row" v-for="(weapon, index) in unit.weapons" :key="weapon.weapon">
                 <div class="col-12">
                     <div class="form-group">
                         <label for="">Weapon</label>
@@ -146,7 +146,7 @@
                 </div>
             </div>
             <h3 class="titleWithAdd">Abilities <button class="btn btnAdd" type="button" @click="addAbility"><i class="fas fa-plus-circle"></i></button></h3>
-            <div class="row" v-for="(ability, index) in unit.abilities" :key="index">
+            <div class="row" v-for="(ability, index) in unit.abilities" :key="ability.ability">
                 <div class="col-12">
                     <div class="form-group">
                         <label for="">Ability</label>
@@ -162,12 +162,12 @@
                 <div class="col-12"><button type="button" class="btn btn-danger btn-block" @click="removeAbility(weapon.weapon)">Delete Ability</button></div>
             </div>
             <h3 class="titleWithAdd">Faction Keywords <button class="btn btnAdd" type="button" @click="addFactionKeyword"><i class="fas fa-plus-circle"></i></button></h3>
-            <div class="row mb-2" v-for="(keyword, index) in unit.factionKeywords" :key="index">
+            <div class="row mb-2" v-for="(keyword, index) in unit.factionKeywords" :key="keyword.keyword">
                 <div class="col-7"><input type="text" class="form-control" v-model="keyword.keyword"></div>
                 <div class="col-5"><button type="button" class="btn btn-danger btn-block" @click="removeFactionKeyword(keyword.keyword)">Delete Keyword</button></div>
             </div>
             <h3 class="titleWithAdd">Keywords <button class="btn btnAdd" type="button" @click="addKeyword"><i class="fas fa-plus-circle"></i></button></h3>
-            <div class="row mb-2" v-for="(keyword, index) in unit.keywords" :key="index">
+            <div class="row mb-2" v-for="(keyword, index) in unit.keywords" :key="keyword.keyword">
                 <div class="col-7"><input type="text" class="form-control" v-model="keyword.keyword"></div>
                 <div class="col-5"><button type="button" class="btn btn-danger btn-block" @click="removeKeyword(keyword.keyword)">Delete Keyword</button></div>
             </div>
