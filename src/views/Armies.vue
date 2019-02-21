@@ -12,42 +12,32 @@
                     <button type="button" class="btn btn-block btn-dark" data-toggle="modal" data-target="#newArmyModal">New Army</button>
                     <ul class="root p-0" v-if="fb.docData">
                         <li v-for="(army, index) in fb.docData.armies" :key="index" :id="army.army">
-                            <armies-list-item :armyIndex="index" :army="army" :handleSelect="setCurrentUnit" :save="save" :edit="toggleEditing" />
+                            <armies-list-item :armyIndex="index" :army="army" :handleSelect="setCurrentUnit" :save="save" :edit="toggleEditing" :handleDelete="deleteArmy" />
                         </li>
                     </ul>
                 </div>
                 <div class="col-12 col-lg-9" v-if="!editing">
-                    <datasheet v-if="currentUnit && !editing" :unit="currentUnit" :armyIndex="currentArmyIndex" :handleDelete="deleteUnit" />
+                    <datasheet v-if="currentUnit" :unit="currentUnit" :armyIndex="currentArmyIndex" :handleDelete="deleteUnit" />
                     <button type="button" class="d-block d-lg-none btn btn-dark btn-block" @click="toggleEditing" v-if="currentUnit">{{ editBtnText }}</button>
                 </div>
                 <div class="col-12 col-lg-9" v-if="editing">
-                    <data-edit v-if="currentUnit && editing" :unit="currentUnit" :handleSave="save" :handleReturn="toggleEditing" />
+                    <data-edit v-if="currentUnit" :unit="currentUnit" :handleSave="save" :handleReturn="toggleEditing" />
                 </div>
             </div>
         </div>
         <!-- New Army Modal -->
-        <div class="modal fade" id="newArmyModal" tabindex="-1" role="dialog" aria-labelledby="newArmyModal" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="newArmyModalLabel">Create New Army</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
+        <confirmation-modal modalId="newArmyModal">
+            <template v-slot:title>Create new army</template>
+            <template>
+                <div class="form-group">
+                    <label for="">Name of Army</label>
+                    <input type="text" class="form-control" v-model="newArmy">
                 </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="">Name of Army</label>
-                        <input type="text" class="form-control" v-model="newArmy">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" @click="addArmy">Create</button>
-                </div>
-                </div>
-            </div>
-        </div>
+            </template>
+            <template v-slot:button>
+                <button type="button" class="btn btn-primary" @click="addArmy">Create</button>
+            </template>
+        </confirmation-modal>
     </div>
 </template>
 
@@ -56,6 +46,7 @@ import RulesNavigation from '@/components/RulesNavigation.vue';
 import ArmiesListItem from '@/components/ArmiesListItem.vue';
 import Datasheet from '@/components/Datasheet.vue';
 import DataEdit from '@/components/DataEdit.vue';
+import ConfirmationModal from '@/components/ConfirmationModal.vue';
 
 export default {
     name: 'armies',
@@ -63,7 +54,8 @@ export default {
         RulesNavigation,
         ArmiesListItem,
         Datasheet,
-        DataEdit
+        DataEdit,
+        ConfirmationModal
     },
     props: ['fb'],
     data() {
@@ -92,9 +84,15 @@ export default {
                 army: this.newArmy,
                 units: []
             });
+            this.save();
+            $('#newArmyModal').modal('toggle');
         },
-        toggleEditing() {
-            this.editing = !this.editing;
+        toggleEditing(setting) {
+            if (setting) {
+                this.editing = setting;
+            } else {
+                this.editing = !this.editing;
+            }
         },
         setCurrentUnit(armyIndex, unit) {
             this.currentUnit = unit;
@@ -107,12 +105,16 @@ export default {
             this.currentArmyIndex = null;
             return;
         },
+        deleteArmy(armyIndex, modalIdReference) {
+            this.fb.docData.armies = this.fb.docData.armies.filter((army, index) => {
+                return index != armyIndex;
+            });
+            $(modalIdReference).modal('toggle');
+            this.save();
+        },
         save() {
             this.fb.docRef.update({
                 armies: this.fb.docData.armies
-            })
-            .then(() => {
-                this.toggleEditing();
             })
         }
     },
@@ -154,8 +156,8 @@ ul {
 
 @media screen and (min-width: 992px) {
     .container {
-        padding: unset;
-        margin: unset;
+        padding: 0 2rem;
+        margin: auto;
         max-width: unset;
     }
 }

@@ -11,7 +11,7 @@
     "fireball": "^1.0.0",
     "firebase": "^5.8.1",
     "firebaseui": "^3.5.2",
-    "vue": "^2.5.21",
+    "vue": "^2.6.6",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {
@@ -23,7 +23,7 @@
     "eslint-plugin-vue": "^5.0.0",
     "node-sass": "^4.11.0",
     "sass-loader": "^7.1.0",
-    "vue-template-compiler": "^2.5.21"
+    "vue-template-compiler": "^2.6.6"
   },
   "eslintConfig": {
     "root": true,

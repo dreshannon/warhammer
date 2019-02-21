@@ -1,7 +1,7 @@
 <template>
     <div class="dataedit">
-        <form @submit.prevent="handleSave">
-        <button type="button" class="btn btn-dark btn-block" @click="handleReturn">Return to datasheet</button>
+        <form @submit.prevent="save">
+        <button type="button" class="btn btn-dark btn-block" @click="handleReturn(false)">Return to datasheet</button>
         <button type="submit" class="btn btn-primary btn-block">Save</button>
             <div class="form-group">
                 <label for="unitNameInput">Unit name</label>
@@ -172,7 +172,7 @@
                 <div class="col-5"><button type="button" class="btn btn-danger btn-block" @click="removeKeyword(keyword.keyword)">Delete Keyword</button></div>
             </div>
             <button type="submit" class="btn btn-primary btn-block">Save</button>
-            <button type="button" class="btn btn-dark btn-block" @click="handleReturn">Return</button>
+            <button type="button" class="btn btn-dark btn-block" @click="handleReturn(false)">Return</button>
         </form>
     </div>
 </template>
@@ -246,6 +246,10 @@ export default {
         removeKeyword(keywordDelete) {
             this.unit.keywords = this.unit.keywords.filter(keyword => keyword.keyword != keywordDelete);
             return;
+        },
+        save() {
+            this.handleSave();
+            this.handleReturn();
         }
     }
 }

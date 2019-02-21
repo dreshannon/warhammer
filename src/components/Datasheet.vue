@@ -90,12 +90,33 @@
                 <p><span v-for="(keyword, index) in unit.keywords" :key="index">{{ keyword.keyword }}<span v-if="index != (unit.keywords.length - 1)">,</span> </span></p>
             </div>
         </div>
-        <button type="button" class="btn btn-danger btn-block" @click="handleDelete(armyIndex, unit.unitName)">Delete</button>
+        <button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#deleteUnit">Delete</button>
+        <confirmation-modal modalId="deleteUnit">
+            <template v-slot:title>Are you sure?</template>
+            <template>
+                <p class="text-center">Are you sure you want to delete this unit?</p>
+                <h3 class="text-center">{{ unit.unitName }}</h3>
+            </template>
+            <template v-slot:button>
+                <button type="button" class="btn btn-danger" @click="deleteUnit">Delete</button>
+            </template>
+        </confirmation-modal>
     </div>
 </template>
 
 <script>
+import ConfirmationModal from './ConfirmationModal.vue';
+
 export default {
-    props: ['unit', 'armyIndex', 'handleDelete']
+    props: ['unit', 'armyIndex', 'handleDelete'],
+    components: {
+        ConfirmationModal
+    },
+    methods: {
+        deleteUnit() {
+            this.handleDelete(this.armyIndex, this.unit.unitName);
+            $('#deleteUnit').modal('toggle');
+        }
+    }
 }
 </script>
