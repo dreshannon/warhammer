@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <sidebar-menu :menu="menu" @collapse="onCollapse" @itemClick="onItemClick" />
+        <sidebar-menu :menu="menu" collapsed="true" @collapse="onCollapse" @itemClick="onItemClick" />
         <div class="container" :class="{ 'isExpanded' : isExpanded }">
             <router-view :fb="fb" />
         </div>
@@ -44,10 +44,11 @@ export default {
                     ]
                 },
                 {
-                    title: 'Logout'
+                    title: 'Logout',
+                    icon: 'fas fa-sign-out-alt'
                 }
             ],
-            isExpanded: true
+            isExpanded: false
         }
     },
     created() {
@@ -75,6 +76,7 @@ export default {
 
 body {
     background-color: #212629;
+    overflow-x: hidden;
 }
 
 #app {

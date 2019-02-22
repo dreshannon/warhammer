@@ -1,8 +1,7 @@
 <template>
     <div class="login">
         <h3>Sign In</h3>
-        <button @click="login">Login</button>
-        <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+        <button class="btn btn-success" @click="login"><i class="fab fa-google"></i> Sign in with Google</button>
     </div>
 </template>
 
@@ -30,7 +29,7 @@ export default {
     methods: {
         login: function() {
             firebase.auth().signInWithRedirect(new firebase.auth.GoogleAuthProvider());
-            // firebase.auth().signInWithPopup(provider).catch(function(error) {
+            // firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider()).catch(function(error) {
             //     console.log(error);
             // });
         }
@@ -38,39 +37,21 @@ export default {
 }
 </script>
 
-<style scoped>
-    .login {
-        margin-top: 40px;
-    }
-    
-    input {
-        margin: 1em auto;
-        width: 20%;
-        padding: 15px;
-        display: block;
-    }
+<style lang="scss" scoped>
+.login {
+    margin-top: 40px;
+}
 
-    button {
-        margin-top: 20px;
-        width: 10%;
-        cursor: pointer;
-        display: block;
-        margin: auto;
-        border-radius: 50%;
-        background-color: white;
-    }
+/* button {
+    margin-top: 20px;
+    width: 10%;
+    cursor: pointer;
+    display: block;
+    margin: auto;
+    background-color: white;
+}
 
-    button:hover {
-        background-color: #eaeaea;
-    }
-
-    p {
-        margin-top: 40px;
-        font-size: 13px;
-    }
-
-    p a {
-        text-decoration: underline;
-        cursor: pointer;
-    }
+button:hover {
+    background-color: #eaeaea;
+} */
 </style>
