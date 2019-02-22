@@ -1,10 +1,5 @@
 <template>
     <div id="compendium">
-        <header class="site-header">
-            <div>
-                <rules-navigation />
-            </div>
-        </header>
         <h1>Compendium</h1>
         <div class="card-deck">
             <router-link class="mini-card" to="/">
@@ -20,13 +15,8 @@
 </template>
 
 <script>
-import RulesNavigation from '@/components/RulesNavigation.vue';
-
 export default {
-    name: 'compendium',
-    components: {
-        RulesNavigation
-    }
+    name: 'compendium'
 }
 </script>
 
@@ -50,7 +40,7 @@ export default {
         justify-content: center;
         align-items: center;
         transition: .2s;
-        margin: 0;
+        margin: 2rem;
         scroll-behavior: smooth;
         color: white;
         text-decoration: none;

@@ -1,28 +1,21 @@
 <template>
     <div id="armies">
-        <header class="site-header">
-            <div>
-                <rules-navigation />
+        <h1 class="page-title">Compendium - Armies <button type="button" class="d-none d-lg-block btn btn-dark" id="editBtn" @click="toggleEditing">{{ editBtnText }}</button></h1>
+        <div class="row">
+            <div class="col-12 col-lg-3">
+                <button type="button" class="btn btn-block btn-dark" data-toggle="modal" data-target="#newArmyModal">New Army</button>
+                <ul class="root p-0" v-if="fb.docData">
+                    <li v-for="(army, index) in fb.docData.armies" :key="index">
+                        <armies-list-item :armyIndex="index" :army="army" :handleSelect="setCurrentUnit" :save="save" :edit="toggleEditing" :handleDelete="deleteArmy" />
+                    </li>
+                </ul>
             </div>
-        </header>
-        <div class="container">
-            <h1 class="page-title">Compendium - Armies <button type="button" class="d-none d-lg-block btn btn-dark" id="editBtn" @click="toggleEditing">{{ editBtnText }}</button></h1>
-            <div class="row">
-                <div class="col-12 col-lg-3">
-                    <button type="button" class="btn btn-block btn-dark" data-toggle="modal" data-target="#newArmyModal">New Army</button>
-                    <ul class="root p-0" v-if="fb.docData">
-                        <li v-for="(army, index) in fb.docData.armies" :key="index" :id="army.army">
-                            <armies-list-item :armyIndex="index" :army="army" :handleSelect="setCurrentUnit" :save="save" :edit="toggleEditing" :handleDelete="deleteArmy" />
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-12 col-lg-9" v-if="!editing">
-                    <datasheet v-if="currentUnit" :unit="currentUnit" :armyIndex="currentArmyIndex" :handleDelete="deleteUnit" />
-                    <button type="button" class="d-block d-lg-none btn btn-dark btn-block" @click="toggleEditing" v-if="currentUnit">{{ editBtnText }}</button>
-                </div>
-                <div class="col-12 col-lg-9" v-if="editing">
-                    <data-edit v-if="currentUnit" :unit="currentUnit" :handleSave="save" :handleReturn="toggleEditing" />
-                </div>
+            <div class="col-12 col-lg-9" v-if="!editing">
+                <datasheet v-if="currentUnit" :unit="currentUnit" :armyIndex="currentArmyIndex" :handleDelete="deleteUnit" />
+                <button type="button" class="d-block d-lg-none btn btn-dark btn-block" @click="toggleEditing" v-if="currentUnit">{{ editBtnText }}</button>
+            </div>
+            <div class="col-12 col-lg-9" v-if="editing">
+                <data-edit v-if="currentUnit" :unit="currentUnit" :handleSave="save" :handleReturn="toggleEditing" />
             </div>
         </div>
         <!-- New Army Modal -->
@@ -42,7 +35,6 @@
 </template>
 
 <script>
-import RulesNavigation from '@/components/RulesNavigation.vue';
 import ArmiesListItem from '@/components/ArmiesListItem.vue';
 import Datasheet from '@/components/Datasheet.vue';
 import DataEdit from '@/components/DataEdit.vue';
@@ -51,7 +43,6 @@ import ConfirmationModal from '@/components/ConfirmationModal.vue';
 export default {
     name: 'armies',
     components: {
-        RulesNavigation,
         ArmiesListItem,
         Datasheet,
         DataEdit,
@@ -140,25 +131,11 @@ ul {
     text-align: left;
 }
 
-.datasheet {
-    background-image: url(../assets/svgs/Necron_emblem.svg);
-    background-repeat: no-repeat;
-    background-position: center;
-}
-
 .root {
     #Necrons {
         background-image: url(../assets/svgs/Necron_emblem.svg);
         background-repeat: no-repeat;
         background-position: center;
-    }
-}
-
-@media screen and (min-width: 992px) {
-    .container {
-        padding: 0 2rem;
-        margin: auto;
-        max-width: unset;
     }
 }
 

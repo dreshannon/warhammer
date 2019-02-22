@@ -1,28 +1,19 @@
 <template>
     <div id="killTeam">
-        <header class="site-header">
-            <div>
-                <rules-navigation />
-            </div>
-        </header>
         <h1>Kill Teams Rules</h1>
-        <embed src="https://cdn.shopify.com/s/files/1/2175/1203/files/VERO-Strozzapretti_Brown_Butter_Butternut_Squash_Recipe_Card.pdf?9947705055714520886" type="application/pdf" height="100%" width="100%">
+        <embed src="https://firebasestorage.googleapis.com/v0/b/warhammer-8fc7f.appspot.com/o/Kill%20Team%20Core%20Rules.pdf?alt=media&token=8d02e2f1-d450-416f-b602-54112e642288" type="application/pdf" height="100%" width="100%">
     </div>
 </template>
 
 <script>
-import RulesNavigation from '@/components/RulesNavigation.vue';
-
 export default {
-    name: 'killteam',
-    components: {
-        RulesNavigation
-    }
+    name: 'killteam'
 }
 </script>
 
 <style scoped>
     #killTeam {
-        background: linear-gradient(to right, #BC3A01, #F27301);
+        /* background: linear-gradient(to right, #BC3A01, #F27301); */
+        height: 100vh;
     }
 </style>
