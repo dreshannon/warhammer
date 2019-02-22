@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <sidebar-menu :menu="menu" @collapse="onCollapse" />
+        <sidebar-menu :menu="menu" @collapse="onCollapse" @itemClick="onItemClick" />
         <div class="container" :class="{ 'isExpanded' : isExpanded }">
             <router-view :fb="fb" />
         </div>
@@ -9,12 +9,17 @@
 
 <script>
 import Firebase from '@/util/firebase';
+import firebase from 'firebase/app';
 
 export default {
     data() {
         return {
             fb: null,
             menu: [
+                {
+                    header: true,
+                    title: 'Warhammer Companion'
+                },
                 {
                     href: '/',
                     title: 'Home',
@@ -37,6 +42,9 @@ export default {
                             title: 'Compendium'
                         }
                     ]
+                },
+                {
+                    title: 'Logout'
                 }
             ],
             isExpanded: true
@@ -49,6 +57,14 @@ export default {
         onCollapse() {
             this.isExpanded = !this.isExpanded;
         },
+        onItemClick(event, item) {
+            console.log(item);
+            if (item.title == 'Logout') {
+                firebase.auth().signOut().then(() => {
+                    this.$router.replace('/login');
+                });
+            }
+        }
     }
 }
 </script>
@@ -91,6 +107,6 @@ body {
 
 .isExpanded {
     margin-left: 350px !important;
-    width: calc(100% - 350px);
+    width: calc(100% - 350px) !important;
 }
 </style>

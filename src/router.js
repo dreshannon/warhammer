@@ -61,12 +61,18 @@ export default new Router({
         {
             path: '/compendium',
             name: 'compendium',
-            component: Compendium
+            component: Compendium,
+            meta: {
+                requiresAuth: true
+            }
         },
         {
             path: '/armies',
             name: 'armies',
-            component: Armies
+            component: Armies,
+            meta: {
+                requiresAuth: true
+            }
         }
     ]
 })

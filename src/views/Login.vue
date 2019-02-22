@@ -7,7 +7,6 @@
 </template>
 
 <script>
-import Firebase from '@/util/firebase';
 import firebase from 'firebase/app';
 // var provider = new firebase.auth.GoogleAuthProvider();
 
@@ -25,16 +24,15 @@ export default {
             var token = result.credential.accessToken;
             this.$router.replace('/home');
         }).catch(function(error) {
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            var email = error.email;
-            var credential = error.credential;
+            console.log('Error: ' + error);
         });
     },
     methods: {
         login: function() {
             firebase.auth().signInWithRedirect(new firebase.auth.GoogleAuthProvider());
-            // this.$router.replace('home');
+            // firebase.auth().signInWithPopup(provider).catch(function(error) {
+            //     console.log(error);
+            // });
         }
     }
 }
