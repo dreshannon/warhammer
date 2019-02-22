@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <sidebar-menu :menu="menu" collapsed="true" @collapse="onCollapse" @itemClick="onItemClick" />
+        <sidebar-menu :menu="menu" :collapsed="!isExpanded" @collapse="onCollapse" @itemClick="onItemClick" />
         <div class="container" :class="{ 'isExpanded' : isExpanded }">
             <router-view :fb="fb" />
         </div>

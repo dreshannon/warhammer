@@ -76,10 +76,11 @@ export default {
                 units: []
             });
             this.save();
-            $('#newArmyModal').modal('toggle');
+            // $('#newArmyModal').modal('toggle');
+            document.getElementById('newArmyModal').modal('toggle');
         },
         toggleEditing(setting) {
-            if (setting) {
+            if (setting == true || setting == false) {
                 this.editing = setting;
             } else {
                 this.editing = !this.editing;
@@ -100,7 +101,8 @@ export default {
             this.fb.docData.armies = this.fb.docData.armies.filter((army, index) => {
                 return index != armyIndex;
             });
-            $(modalIdReference).modal('toggle');
+            // $(modalIdReference).modal('toggle');
+            document.getElementById(modalIdReference).modal('toggle');
             this.save();
         },
         save() {

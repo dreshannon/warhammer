@@ -18,9 +18,9 @@ export default {
                 this.$router.replace('/home');
             }
         });
-        firebase.auth().getRedirectResult().then(function(result) {
+        firebase.auth().getRedirectResult().then(function() {
             // Google Access token
-            var token = result.credential.accessToken;
+            // var token = result.credential.accessToken;
             this.$router.replace('/home');
         }).catch(function(error) {
             console.log('Error: ' + error);

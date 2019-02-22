@@ -2,13 +2,15 @@
     <div id="compendium">
         <h1>Compendium</h1>
         <div class="card-deck">
-            <router-link class="mini-card" to="/">
+            <router-link class="mini-card under-construction" to="/">
                 <h3>Weapons</h3>
                 <img src="../assets/svgs/Weapons_emblem.svg" alt="Weapons Image">
+                <p>(Under Construction)</p>
             </router-link>
-            <router-link class="mini-card" to="/armies">
+            <router-link class="mini-card under-construction" to="/armies">
                 <h3>Armies</h3>
                 <img src="../assets/svgs/Armies_emblem.svg" alt="Armies Image">
+                <p>(Under Construction)</p>
             </router-link>
         </div>
     </div>
@@ -44,5 +46,9 @@ export default {
         scroll-behavior: smooth;
         color: white;
         text-decoration: none;
+    }
+
+    .under-construction {
+        background: repeating-linear-gradient(45deg, yellow, black 15%, black 20%);
     }
 </style>

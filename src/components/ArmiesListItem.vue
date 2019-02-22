@@ -111,8 +111,12 @@ export default {
                     ability: '',
                     description: ''
                 }],
-                factionKeywords: [''],
-                keywords: ['']
+                factionKeywords: [
+                    { keyword: '' }
+                ],
+                keywords: [
+                    { keyword: '' }
+                ]
             });
 
             this.save();
