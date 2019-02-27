@@ -207,7 +207,8 @@
             <h3 class="titleWithAdd">Abilities <button class="btn btnAdd" type="button" @click="addAbility"><i class="fas fa-plus-circle"></i></button></h3>
             <div class="row" v-for="(ability, index) in unit.abilities" :key="index">
                 <div class="col-3">{{ ability.ability }}</div>
-                <div class="col-9">{{ ability.description }}</div>
+                <div class="col-8">{{ ability.description }}</div>
+                <div class="col-1"><button type="button" class="btn btn-danger" @click="removeAbility(ability.ability)">Delete</button></div>
             </div>
             <div class="row">
                 <div class="col-12 col-lg-3">
@@ -222,7 +223,7 @@
                         <input type="text" class="form-control" v-model="newAbility.description">
                     </div>
                 </div>
-                <div class="col-12"><button type="button" class="btn btn-danger btn-block" @click="removeAbility(weapon.weapon)">Delete Ability</button></div>
+                <div class="col-12"><button type="button" class="btn btn-primary btn-block" @click="addAbility">Add Ability</button></div>
             </div>
             <h3 class="titleWithAdd">Faction Keywords <button class="btn btnAdd" type="button" @click="addFactionKeyword"><i class="fas fa-plus-circle"></i></button></h3>
             <div class="row mb-2" v-for="(keyword, index) in unit.factionKeywords" :key="keyword.keyword">
@@ -311,10 +312,11 @@ export default {
             return;
         },
         addAbility() {
-            this.unit.abilities.push({
-                ability: '',
-                description: ''
-            });
+            this.unit.abilities.push(this.newAbility);
+            this.newAbility = {
+                ability: null,
+                description: null
+            };
             return;
         },
         removeAbility(abilityName) {
