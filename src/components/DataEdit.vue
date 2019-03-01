@@ -2,7 +2,7 @@
     <div class="dataedit">
         <form @submit.prevent="save">
         <button type="button" class="btn btn-dark btn-block" @click="handleReturn(false)">Return to datasheet</button>
-        <button type="submit" class="btn btn-primary btn-block">Save</button>
+        <button type="submit" class="btn btn-success btn-block">Save</button>
             <div class="form-group">
                 <label for="unitNameInput">Unit name</label>
                 <input type="text" class="form-control" id="unitNameInput" v-model="unit.unitName">
@@ -147,7 +147,7 @@
                         <td>{{ weapon.armourPenetration }}</td>
                         <td>{{ weapon.damage }}</td>
                         <td>{{ weapon.abilities }}</td>
-                        <td><button type="button" class="btn btn-danger" @click="removeWeapon(weapon.weapon)">Delete</button></td>
+                        <td><button type="button" class="btn btn-danger btn-block" @click="removeWeapon(weapon.weapon)">Delete</button></td>
                     </tr>
                 </tbody>
             </table>
@@ -208,7 +208,7 @@
             <div class="row" v-for="(ability, index) in unit.abilities" :key="index">
                 <div class="col-3">{{ ability.ability }}</div>
                 <div class="col-8">{{ ability.description }}</div>
-                <div class="col-1"><button type="button" class="btn btn-danger" @click="removeAbility(ability.ability)">Delete</button></div>
+                <div class="col-1"><button type="button" class="btn btn-danger btn-block" @click="removeAbility(ability.ability)">Delete</button></div>
             </div>
             <div class="row">
                 <div class="col-12 col-lg-3">
@@ -226,16 +226,24 @@
                 <div class="col-12"><button type="button" class="btn btn-primary btn-block" @click="addAbility">Add Ability</button></div>
             </div>
             <h3 class="titleWithAdd">Faction Keywords <button class="btn btnAdd" type="button" @click="addFactionKeyword"><i class="fas fa-plus-circle"></i></button></h3>
-            <div class="row mb-2" v-for="(keyword, index) in unit.factionKeywords" :key="keyword.keyword">
-                <div class="col-7"><input type="text" class="form-control" v-model="keyword.keyword"></div>
-                <div class="col-5"><button type="button" class="btn btn-danger btn-block" @click="removeFactionKeyword(keyword.keyword)">Delete Keyword</button></div>
+            <div class="row my-2" v-for="(keyword, index) in unit.factionKeywords" :key="keyword.keyword">
+                <div class="col-11">{{ keyword.keyword }}</div>
+                <div class="col-1"><button type="button" class="btn btn-danger btn-block" @click="removeFactionKeyword(keyword.keyword)">Delete</button></div>
+            </div>
+            <div class="row my-2">
+                <div class="col-12 col-lg-11"><input type="text" class="form-control" v-model="newFactionKeyword.keyword"></div>
+                <div class="col-12 col-lg-1"><button type="button" class="btn btn-primary btn-block" @click="addFactionKeyword">Add</button></div>
             </div>
             <h3 class="titleWithAdd">Keywords <button class="btn btnAdd" type="button" @click="addKeyword"><i class="fas fa-plus-circle"></i></button></h3>
-            <div class="row mb-2" v-for="(keyword, index) in unit.keywords" :key="keyword.keyword">
-                <div class="col-7"><input type="text" class="form-control" v-model="keyword.keyword"></div>
-                <div class="col-5"><button type="button" class="btn btn-danger btn-block" @click="removeKeyword(keyword.keyword)">Delete Keyword</button></div>
+            <div class="row my-2" v-for="(keyword, index) in unit.keywords" :key="keyword.keyword">
+                <div class="col-11">{{ keyword.keyword }}</div>
+                <div class="col-1"><button type="button" class="btn btn-danger btn-block" @click="removeKeyword(keyword.keyword)">Delete</button></div>
             </div>
-            <button type="submit" class="btn btn-primary btn-block">Save</button>
+            <div class="row my-2">
+                <div class="col-12 col-lg-11"><input type="text" class="form-control" v-model="newKeyword.keyword"></div>
+                <div class="col-12 col-lg-1"><button type="button" class="btn btn-primary btn-block" @click="addKeyword">Add</button></div>
+            </div>
+            <button type="submit" class="btn btn-success btn-block">Save</button>
             <button type="button" class="btn btn-dark btn-block" @click="handleReturn(false)">Return</button>
         </form>
     </div>
@@ -270,6 +278,12 @@ export default {
             newAbility: {
                 ability: null,
                 description: null
+            },
+            newFactionKeyword: {
+                keyword: null
+            },
+            newKeyword: {
+                keyword: null
             }
         }
     },
@@ -324,9 +338,10 @@ export default {
             return;
         },
         addFactionKeyword() {
-            this.unit.factionKeywords.push({
-                keyword: ''
-            });
+            this.unit.factionKeywords.push(this.newFactionKeyword);
+            this.newFactionKeyword = {
+                keyword: null
+            };
             return;
         },
         removeFactionKeyword(keywordDelete) {
@@ -334,9 +349,10 @@ export default {
             return;
         },
         addKeyword() {
-            this.unit.keywords.push({
-                keyword: ''
-            });
+            this.unit.keywords.push(this.newKeyword);
+            this.newKeyword = {
+                keyword: null
+            };
             return;
         },
         removeKeyword(keywordDelete) {

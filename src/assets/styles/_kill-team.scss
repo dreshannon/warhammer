@@ -1,0 +1,9 @@
+li.kill-team {
+    background-image: linear-gradient(to right, $kt-orange, $kt-light-orange);
+}
+
+span.kill-team {
+    background: -webkit-linear-gradient($kt-orange, $kt-light-orange);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}

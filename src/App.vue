@@ -71,7 +71,8 @@ export default {
 </script>
 
 
-<style>
+<style lang="scss">
+@import './assets/styles/style.scss';
 @import './assets/styles/main-nav.css';
 
 body {
