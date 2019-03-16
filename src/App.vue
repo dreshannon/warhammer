@@ -11,6 +11,9 @@
 import Firebase from '@/util/firebase';
 import firebase from 'firebase/app';
 
+import 'popper.js';
+import 'bootstrap';
+
 export default {
     data() {
         return {

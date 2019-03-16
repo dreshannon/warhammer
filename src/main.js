@@ -4,6 +4,8 @@ import router from './router';
 import VueSidebarMenu from 'vue-sidebar-menu';
 import 'vue-sidebar-menu/dist/vue-sidebar-menu.css';
 
+var $ = require("jquery");
+
 Vue.use(VueSidebarMenu);
 
 Vue.config.productionTip = false;

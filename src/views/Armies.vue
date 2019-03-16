@@ -41,20 +41,24 @@
                 <button type="button" class="btn btn-primary" @click="addArmy">Create</button>
             </template>
         </confirmation-modal>
-        <modal v-if="showNewArmyModal" :show="showNewArmyModal">
+        <!-- <modal v-if="showNewArmyModal" :show="showNewArmyModal">
             <tempalte v-slot:header>TEST HEADER</tempalte>
             <tempalte>TEST</tempalte>
             <tempalte v-slot:footer>TEST FOOTER</tempalte>
-        </modal>
+        </modal> -->
     </div>
 </template>
 
 <script>
+import 'popper.js';
+import 'bootstrap';
 import ArmiesListItem from '@/components/ArmiesListItem.vue';
 import Datasheet from '@/components/Datasheet.vue';
 import DataEdit from '@/components/DataEdit.vue';
 import ConfirmationModal from '@/components/ConfirmationModal.vue';
-import Modal from '@/components/Modal.vue';
+// import Modal from '@/components/Modal.vue';
+
+var $ = require("jquery");
 
 export default {
     name: 'armies',
@@ -63,7 +67,7 @@ export default {
         Datasheet,
         DataEdit,
         ConfirmationModal,
-        Modal
+        // Modal
     },
     props: ['fb'],
     data() {
@@ -75,7 +79,7 @@ export default {
                 army: null,
                 isKillTeam: false
             },
-            showNewArmyModal: true
+            showNewArmyModal: false
         }
     },
     computed: {
@@ -102,8 +106,8 @@ export default {
                 army: null,
                 isKillTeam: false
             };
-            // $('#newArmyModal').modal('toggle');
-            document.getElementById('newArmyModal').modal('toggle');
+            $('#newArmyModal').modal('toggle');
+            // document.getElementById('newArmyModal').modal('toggle');
         },
         toggleEditing(setting) {
             if (setting == true || setting == false) {
